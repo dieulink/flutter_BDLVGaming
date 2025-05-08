@@ -1,0 +1,16 @@
+import 'package:flutter/material.dart';
+
+// File: chat_page.dart
+
+class ListPage extends StatelessWidget {
+  const ListPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text('chat_page'),
+      ),
+    );
+  }
+}
