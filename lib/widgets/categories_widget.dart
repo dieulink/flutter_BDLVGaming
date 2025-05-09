@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 class CategoriesWidget extends StatelessWidget{
 
   final List<Map<String, String>> category = [
-     {"imagePath": "assets/imgs/banSung.jpg", "title": "Bắn súng"},
-     {"imagePath": "assets/imgs/chienThuat.jpg", "title": "Chiến thuật"},
-     {"imagePath": "assets/imgs/diCanh.jpg", "title": "Đi canh"},
-     {"imagePath": "assets/imgs/doiKhang.jpg", "title": "Đối kháng"},
-     {"imagePath": "assets/imgs/duaXe.jpg", "title": "Đua xe"},
-     {"imagePath": "assets/imgs/giaiDo.jpg", "title": "Giải đố"},
-     {"imagePath": "assets/imgs/hanhDong.jpg", "title": "Hành động"},
-     {"imagePath": "assets/imgs/kinhDi.jpg", "title": "Kinh dị"},
-     {"imagePath": "assets/imgs/moPhong.jpg", "title": "Mô phỏng"},
-     {"imagePath": "assets/imgs/nhapVai.jpg", "title": "Nhập vai"},
-     {"imagePath": "assets/imgs/phieuLuu.jpg", "title": "Phiêu lưu"},
-     {"imagePath": "assets/imgs/sinhTon.jpg", "title": "Sinh tồn"},
-     {"imagePath": "assets/imgs/theThao.jpg", "title": "Thể thao"},
+     {"imagePath": "assets/imgs/theloai/bansung.png", "title": "Bắn súng"},
+     {"imagePath": "assets/imgs/theloai/chienthuat.png", "title": "Chiến thuật"},
+     {"imagePath": "assets/imgs/theloai/dicanh.png", "title": "Đi canh"},
+     {"imagePath": "assets/imgs/theloai/doikhang.png", "title": "Đối kháng"},
+     {"imagePath": "assets/imgs/theloai/duaxe.png", "title": "Đua xe"},
+     {"imagePath": "assets/imgs/theloai/giaido.png", "title": "Giải đố"},
+     {"imagePath": "assets/imgs/theloai/hanhdong.png", "title": "Hành động"},
+     {"imagePath": "assets/imgs/theloai/kinhdi.png", "title": "Kinh dị"},
+     {"imagePath": "assets/imgs/theloai/mophong.png", "title": "Mô phỏng"},
+     {"imagePath": "assets/imgs/theloai/nhapvai.png", "title": "Nhập vai"},
+     {"imagePath": "assets/imgs/theloai/phieuluu.png", "title": "Phiêu lưu"},
+     {"imagePath": "assets/imgs/theloai/sinhton.png", "title": "Sinh tồn"},
+     {"imagePath": "assets/imgs/theloai/thethao.png", "title": "Thể thao"},
   ];
   @override
   Widget build(BuildContext context) {
@@ -31,16 +31,16 @@ class CategoriesWidget extends StatelessWidget{
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Column(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
                     category["imagePath"]!,
-                    height: 60,
-                    width: 80,
-                    fit: BoxFit.cover,
+                    height: 40,
+                    width: 50,
+                    //fit: BoxFit.cover,
                   ),
                 ),
                 Text(
@@ -48,7 +48,7 @@ class CategoriesWidget extends StatelessWidget{
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: mainColor,
+                    color: black,
                   ),
                 )
               ],

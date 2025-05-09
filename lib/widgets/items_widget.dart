@@ -30,9 +30,9 @@ class ItemsWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      "sale",
+                      "-50%",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -48,10 +48,14 @@ class ItemsWidget extends StatelessWidget {
               onTap: () {},
               child: Container(
                 margin: EdgeInsets.all(10),
-                child: Image.asset(
-                  "assets/imgs/img_game_test.png",
-                  height: 120,
-                  width: 120,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    "assets/imgs/banSung.jpg",
+                    height: 120,
+                    width: 150,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

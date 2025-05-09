@@ -20,7 +20,7 @@ class CartPage extends StatelessWidget {
             ),
           child: SizedBox(
               height: 500, // nhỏ hơn tí để tránh đụng padding
-              child: CartItemWidget(), // ListView nằm trong SizedBox sẽ không bị kéo giãn
+              child: CartItemWidget(), 
             ),
           ),
           Padding(

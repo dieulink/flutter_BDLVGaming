@@ -12,27 +12,29 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView( children: [
+      body: ListView( 
+        
+        children: [
         HomeAppBar(),
         Container(
           //height: getSizeHeight(context)*0.8,
           padding: EdgeInsets.only(top: 15),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 245, 243, 243),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(35),
-              topRight: Radius.circular(35)
-            )
+            // borderRadius: BorderRadius.only(
+            //   topLeft: Radius.circular(35),
+            //   topRight: Radius.circular(35)
+            // )
           ),
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 height: 45,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(30)
+                  borderRadius: BorderRadius.circular(5)
                 ),
                 child: Row(
                   children: [
@@ -56,27 +58,30 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 220,
-                child: PageView.builder(
-                  itemCount: 5,
-                  controller: PageController(
-                    viewportFraction: 1, // cho thấy 1 ít của ảnh bên cạnh
-                    initialPage: 0,
-                  ),
-                  physics: BouncingScrollPhysics(), // hoặc ClampingScrollPhysics()
-                  itemBuilder: (_, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          "assets/imgs/theThao.jpg",
-                          fit: BoxFit.cover,
+              Container(
+                margin:EdgeInsets.only(top: 10),
+                child: SizedBox(
+                  height: 200,
+                  child: PageView.builder(
+                    itemCount: 5,
+                    controller: PageController(
+                      viewportFraction: 1, 
+                      initialPage: 0,
+                    ),
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (_, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.asset(
+                            "assets/imgs/theThao.jpg",
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
               Container(
