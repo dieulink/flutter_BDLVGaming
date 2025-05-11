@@ -1,4 +1,7 @@
 import 'package:app_ban_game/screens/login_screens/register_page.dart';
+import 'package:app_ban_game/screens/login_screens/success_page.dart';
+import 'package:app_ban_game/screens/main_screens/profile_page.dart';
+import 'package:app_ban_game/screens/profile_screens/info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; 
 import 'package:app_ban_game/screens/login_screens/on_boarding.dart';
@@ -21,11 +24,13 @@ class MainApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       routes: {
-        "/": (context) => OnBoarding(),
+        "/": (context) => Home(),
         "cartPage": (context) => CartPage(),
         "itemPage": (context) => ItemPage(),
         "homePage": (context) => Home(),
-        "registerPage": (context) => RegisterPage()
+        "registerPage": (context) => RegisterPage(),
+        "successPage":(context) => SuccessPage(),
+        "infoPage":(context) => InfoPage()
       },
     );
   }

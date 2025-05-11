@@ -1,12 +1,13 @@
 import 'package:app_ban_game/ui_values.dart';
+import 'package:app_ban_game/widgets/button_register_widget.dart';
 import 'package:app_ban_game/widgets/form_login_widget.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passworrdController = TextEditingController();
-  final TextEditingController passworrdController2 = TextEditingController();
+  final TextEditingController emailRegisterController = TextEditingController();
+  final TextEditingController passwordRegisterController = TextEditingController();
+  final TextEditingController passwordRegisterController2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +37,36 @@ class RegisterPage extends StatelessWidget {
                     fontWeight: FontWeight.w500
                   ),
                 ),
+                const SizedBox(height: 20,),
                 //email
-                FormLoginWidget(controller: emailController,text: 'Email',obscure: false,textInputType: TextInputType.emailAddress,),
+                FormLoginWidget(controller: emailRegisterController,text: 'Email',obscure: false,textInputType: TextInputType.emailAddress,),
                 const SizedBox(height: 20,),
                 //pass
-                FormLoginWidget(controller: passworrdController, text: 'Password', textInputType: TextInputType.text, obscure: true),             
+                FormLoginWidget(controller: passwordRegisterController, text: 'Password', textInputType: TextInputType.text, obscure: true),             
                 const SizedBox(height: 20,),
                 //pass confirm
-                FormLoginWidget(controller: passworrdController2, text: 'Confirm Password', textInputType: TextInputType.text, obscure: true),             
+                FormLoginWidget(controller: passwordRegisterController2, text: 'Confirm Password', textInputType: TextInputType.text, obscure: true),             
                 const SizedBox(height: 20,),
+
+                ButtonRegisterWidget(),
+                const SizedBox(height: 20,),
+                Center(
+                  child: Text(
+                      '- Hoặc đăng kí với -',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15
+                      ),
+                    ),
+                ),
+                const SizedBox(height: 30,),
+                Center(
+                  child: Image.asset(
+                    'assets/imgs/logoGG.png',
+                    height: 25,
+                  ),
+                ),
+                const SizedBox(height: 30,),
               ]
             ),
           ) 

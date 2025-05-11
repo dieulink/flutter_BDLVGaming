@@ -27,10 +27,17 @@ class CartItemWidget extends StatelessWidget {
                 activeColor: mainColor,
               ),
               Container(
-                height: 70,
-                width: 70,
                 margin: EdgeInsets.only(right: 15),
-                child: Image.asset("assets/imgs/img_game_test.png"),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    "assets/imgs/nhapVai.jpg",
+                    width: 80,
+                    height: 60,
+                    fit: BoxFit.cover,
+                    ),
+                  
+                  ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),

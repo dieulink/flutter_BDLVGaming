@@ -15,7 +15,7 @@ class OnBoarding extends StatelessWidget {
           Get.to(
             () => LoginPage(),
             transition: Transition.noTransition,
-            duration: Duration(milliseconds: 1000),
+            duration: Duration(milliseconds: 1600),
             curve: Curves.easeInOut            
             );
         });

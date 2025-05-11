@@ -1,8 +1,8 @@
 import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
 
-class ButtonLoginWidget extends StatelessWidget {
-  const ButtonLoginWidget({super.key});
+class ButtonRegisterWidget extends StatelessWidget {
+  const ButtonRegisterWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ButtonLoginWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
-          'Đăng nhập',
+          'Đăng kí',
           style: TextStyle(
             color: white,
             fontWeight: FontWeight.w600,

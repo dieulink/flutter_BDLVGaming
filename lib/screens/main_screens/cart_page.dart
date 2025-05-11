@@ -16,7 +16,7 @@ class CartPage extends StatelessWidget {
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 245, 243, 243),
-              borderRadius: BorderRadius.circular(25),
+              //borderRadius: BorderRadius.circular(25),
             ),
           child: SizedBox(
               height: 500, // nhỏ hơn tí để tránh đụng padding

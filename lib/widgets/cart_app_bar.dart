@@ -15,7 +15,7 @@ class CartAppBar extends StatelessWidget {
             },
             child: 
             Icon(
-              Icons.arrow_back,
+              Icons.navigate_before,
               color: mainColor,
               size: 30,
             )            
