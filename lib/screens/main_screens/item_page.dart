@@ -1,6 +1,8 @@
 import 'package:app_ban_game/ui_values.dart';
 import 'package:app_ban_game/widgets/item_app_bar.dart';
+import 'package:app_ban_game/widgets/rating_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
 class ItemPage extends StatelessWidget {
@@ -79,7 +81,7 @@ class ItemPage extends StatelessWidget {
                       ),
                       SizedBox(height: 15,),                      
                       Container(
-                        height: 1,
+                        height: 5,
                         color: Colors.grey,
                       ),
                       SizedBox(height: 15,),
@@ -105,11 +107,22 @@ class ItemPage extends StatelessWidget {
                                     color: mainColor
                                   ),
                               ),
-                            )
+                            ),
+                            Spacer(),
+                            RatingBarIndicator(
+                              rating: 3.5, 
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5, 
+                              itemSize: 30.0, 
+                              direction: Axis.horizontal, 
+                            ),
                           ],
                         ),
                       ),
-
+                      RatingItem(),
                     ],
                   ),
                   

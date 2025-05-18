@@ -10,7 +10,7 @@ class SuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 3500), () {
+      Future.delayed(const Duration(milliseconds: 3300), () {
         Get.off(() => const Home()); 
       });
     });

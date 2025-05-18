@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
   final TextEditingController emailRegisterController = TextEditingController();
+  final TextEditingController phoneRegisterController = TextEditingController();
   final TextEditingController passwordRegisterController = TextEditingController();
-  final TextEditingController passwordRegisterController2 = TextEditingController();
+  final TextEditingController usernameRegisterController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,13 +42,16 @@ class RegisterPage extends StatelessWidget {
                 //email
                 FormLoginWidget(controller: emailRegisterController,text: 'Email',obscure: false,textInputType: TextInputType.emailAddress,),
                 const SizedBox(height: 20,),
-                //pass
+                //pgone
+                FormLoginWidget(controller: phoneRegisterController, text: 'Phone number', textInputType: TextInputType.phone, obscure: true),             
+                const SizedBox(height: 20,),
+                //pass 
                 FormLoginWidget(controller: passwordRegisterController, text: 'Password', textInputType: TextInputType.text, obscure: true),             
                 const SizedBox(height: 20,),
-                //pass confirm
-                FormLoginWidget(controller: passwordRegisterController2, text: 'Confirm Password', textInputType: TextInputType.text, obscure: true),             
+                //name
+                FormLoginWidget(controller: usernameRegisterController, text: 'User Name', textInputType: TextInputType.text, obscure: true),    
                 const SizedBox(height: 20,),
-
+                
                 ButtonRegisterWidget(),
                 const SizedBox(height: 20,),
                 Center(

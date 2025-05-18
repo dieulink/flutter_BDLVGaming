@@ -48,7 +48,7 @@ class CartItemWidget extends StatelessWidget {
                     Text(
                       "title",
                       style:TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ) ,
@@ -57,8 +57,8 @@ class CartItemWidget extends StatelessWidget {
                       "100vnđ",
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        //fontWeight: FontWeight.bold,
                       ),
                     )
                   ],

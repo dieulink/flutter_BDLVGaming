@@ -60,7 +60,10 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20,),
-                ButtonLoginWidget(),
+                ButtonLoginWidget(
+                  emailController: emailController,
+                  passwordController: passworrdController,
+                ),
                 const SizedBox(height: 30,),
                 Center(
                   child: Text(

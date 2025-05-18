@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       routes: {
-        "/": (context) => Home(),
+        "/": (context) => OnBoarding(),
         "cartPage": (context) => CartPage(),
         "itemPage": (context) => ItemPage(),
         "homePage": (context) => Home(),

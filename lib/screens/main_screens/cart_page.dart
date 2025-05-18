@@ -12,7 +12,7 @@ class CartPage extends StatelessWidget {
           CartAppBar(),
 
           Container(
-            height: 410,
+            height: 540,
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 245, 243, 243),
@@ -38,63 +38,81 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Text(
                     "Thêm voucher",
                     style: TextStyle(
                       color: mainColor,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          Container(
+            height: 1,
+            color: Colors.grey,
+              ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
                   "Tổng : ",
                   style: TextStyle(
-                    color: mainColor,
-                    fontSize: 20,
+                    color: black,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold
                   ),
                 ),
                 Text(
                   "1000vnđ",
                   style: TextStyle(
-                    fontSize: 23,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: red,
+                    color: black,
+                  ),
+                ),
+                SizedBox(width: 15,),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    height: 50,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: mainColor,
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Mua hàng",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: white
+                          ),
+                        ),
+                          Text(
+                          " (10)",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: white
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
+
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              height: 50,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: mainColor,
-                borderRadius: BorderRadius.circular(20)
-              ),
-              child: Text(
-                "Thanh toán",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: white
-                ),
-              ),
-            ),
-          )
-
         ],
         
       ),
