@@ -1,9 +1,10 @@
+import 'package:app_ban_game/screens/login_screens/forgot_password.dart';
 import 'package:app_ban_game/screens/login_screens/register_page.dart';
 import 'package:app_ban_game/screens/login_screens/success_page.dart';
 import 'package:app_ban_game/screens/main_screens/profile_page.dart';
 import 'package:app_ban_game/screens/profile_screens/info_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:app_ban_game/screens/login_screens/on_boarding.dart';
 import 'package:app_ban_game/screens/main_screens/cart_page.dart';
 import 'package:app_ban_game/screens/main_screens/home.dart';
@@ -18,19 +19,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp( 
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-      ),
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       routes: {
         "/": (context) => OnBoarding(),
         "cartPage": (context) => CartPage(),
         "itemPage": (context) => ItemPage(),
         "homePage": (context) => Home(),
         "registerPage": (context) => RegisterPage(),
-        "successPage":(context) => SuccessPage(),
-        "infoPage":(context) => InfoPage()
+        "successPage": (context) => SuccessPage(),
+        "infoPage": (context) => InfoPage(),
+        "forgotPass": (context) => ForgotPassword(),
       },
     );
   }

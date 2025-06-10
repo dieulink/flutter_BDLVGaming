@@ -1,17 +1,17 @@
+import 'package:app_ban_game/models/email_request.dart';
 import 'package:app_ban_game/models/login_request.dart';
 import 'package:app_ban_game/services/login_service.dart';
+import 'package:app_ban_game/services/send_otp_service.dart';
 import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
 
-class ButtonLoginWidget extends StatelessWidget {
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
+class ButtonSendOtp extends StatelessWidget {
+  final TextEditingController emailOtpController;
   final GlobalKey<FormState> formKey;
 
-  const ButtonLoginWidget({
+  const ButtonSendOtp({
     super.key,
-    required this.emailController,
-    required this.passwordController,
+    required this.emailOtpController,
     required this.formKey,
   });
 
@@ -19,25 +19,24 @@ class ButtonLoginWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        final email = emailController.text.trim();
-        final pass = passwordController.text.trim();
+        final email = emailOtpController.text.trim();
 
         if (!formKey.currentState!.validate()) {
           return;
         }
-        final loginRequest = LoginRequest(email: email, password: pass);
-        bool success = await LoginService.login(loginRequest);
+        final emailRequest = EmailRequest(email: email);
+        bool success = await SendOtpService.sendOtpService(emailRequest);
 
         if (success) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text('Đăng nhập thành công')));
+          ).showSnackBar(SnackBar(content: Text('Gửi OTP thành công')));
 
           Navigator.pushNamed(context, 'successPage');
         } else {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Đăng nhập thất bại')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Email chưa đăng kí hoặc không tồn tại')),
+          );
         }
       },
       child: Container(
@@ -48,7 +47,7 @@ class ButtonLoginWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: const Text(
-          'Đăng nhập',
+          'Nhận mã OTP ',
           style: TextStyle(color: white, fontWeight: FontWeight.w600),
         ),
       ),

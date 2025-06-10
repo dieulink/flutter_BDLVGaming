@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:app_ban_game/models/login_request.dart';
+import 'package:app_ban_game/models/register_request.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-class LoginService {
-  static Future<bool> login(LoginRequest request) async {
-    final url = Uri.parse('http://192.168.5.136:8080/loginApi');
+class RegisterService {
+  static Future<bool> register(RegisterRequest request) async {
+    final url = Uri.parse('http://192.168.5.136:8080/registerApi');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode(request.toJson());
 
@@ -22,16 +23,17 @@ class LoginService {
         final jsonResponse = jsonDecode(response.body);
         final token = jsonResponse['token'];
 
+        print('Token nhận được: $token');
+
         // Giải mã token để kiểm tra
         Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-        print(jsonEncode(decodedToken));
+        print('Giải mã token: $decodedToken');
 
         // Lưu token vào SharedPreferences
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('jwt_token', token);
         print(token);
 
-        await prefs.setString('decode_token', jsonEncode(decodedToken));
         return true; // login thành công
       } else {
         print('Lỗi đăng nhập: ${response.body}');
