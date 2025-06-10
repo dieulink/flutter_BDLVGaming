@@ -69,12 +69,12 @@ class LoginPage extends StatelessWidget {
                   //pass
                   FormLoginWidget(
                     controller: passworrdController,
-                    text: 'Password',
+                    text: 'Mật khẩu',
                     textInputType: TextInputType.text,
                     obscure: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Vui lòng nhập password !';
+                        return 'Vui lòng nhập Mật khẩu !';
                       }
                       return null;
                     },

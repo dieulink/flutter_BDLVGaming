@@ -32,7 +32,7 @@ class ButtonSendOtp extends StatelessWidget {
             context,
           ).showSnackBar(SnackBar(content: Text('Gửi OTP thành công')));
 
-          Navigator.pushNamed(context, 'successPage');
+          Navigator.pushNamed(context, 'resetPass');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Email chưa đăng kí hoặc không tồn tại')),

@@ -1,60 +1,84 @@
-import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
+import 'package:app_ban_game/models/category_model.dart';
+import 'package:app_ban_game/services/category_service.dart';
 
-class CategoriesWidget extends StatelessWidget{
+class CategoriesWidget extends StatefulWidget {
+  @override
+  State<CategoriesWidget> createState() => _CategoriesWidgetState();
+}
 
-  final List<Map<String, String>> category = [
-     {"imagePath": "assets/imgs/theloai/bansung.png", "title": "Bắn súng"},
-     {"imagePath": "assets/imgs/theloai/chienthuat.png", "title": "Chiến thuật"},
-     {"imagePath": "assets/imgs/theloai/dicanh.png", "title": "Đi canh"},
-     {"imagePath": "assets/imgs/theloai/doikhang.png", "title": "Đối kháng"},
-     {"imagePath": "assets/imgs/theloai/duaxe.png", "title": "Đua xe"},
-     {"imagePath": "assets/imgs/theloai/giaido.png", "title": "Giải đố"},
-     {"imagePath": "assets/imgs/theloai/hanhdong.png", "title": "Hành động"},
-     {"imagePath": "assets/imgs/theloai/kinhdi.png", "title": "Kinh dị"},
-     {"imagePath": "assets/imgs/theloai/mophong.png", "title": "Mô phỏng"},
-     {"imagePath": "assets/imgs/theloai/nhapvai.png", "title": "Nhập vai"},
-     {"imagePath": "assets/imgs/theloai/phieuluu.png", "title": "Phiêu lưu"},
-     {"imagePath": "assets/imgs/theloai/sinhton.png", "title": "Sinh tồn"},
-     {"imagePath": "assets/imgs/theloai/thethao.png", "title": "Thể thao"},
-  ];
+class _CategoriesWidgetState extends State<CategoriesWidget> {
+  List<CategoryModel> categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategoryData();
+  }
+
+  void fetchCategoryData() async {
+    try {
+      final data = await CategoryService.fetchCategories();
+      setState(() {
+        categories = data;
+      });
+    } catch (e) {
+      print('Error loading categories: $e');
+    }
+  }
+
+  Map<String, String> getCategoryImageMap() {
+    return {
+      "banSung": "assets/imgs/theloai/bansung.png",
+      "chienThuat": "assets/imgs/theloai/chienthuat.png",
+      "diCanh": "assets/imgs/theloai/dicanh.png",
+      "doiKhang": "assets/imgs/theloai/doikhang.png",
+      "duaXe": "assets/imgs/theloai/duaxe.png",
+      "giaiDo": "assets/imgs/theloai/giaido.png",
+      "hanhDong": "assets/imgs/theloai/hanhdong.png",
+      "kinhDi": "assets/imgs/theloai/kinhdi.png",
+      "moPhong": "assets/imgs/theloai/mophong.png",
+      "nhapVai": "assets/imgs/theloai/nhapvai.png",
+      "phieuLuu": "assets/imgs/theloai/phieuluu.png",
+      "sinhTon": "assets/imgs/theloai/sinhton.png",
+      "theThao": "assets/imgs/theloai/thethao.png",
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+    final imgMap = getCategoryImageMap();
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: category.map((category){ //lặp qua danh sách category, mỗi phần tử là 1 map
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 8.0),
-            padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ClipRRect(
+        children:
+            categories.map((category) {
+              String imgPath =
+                  imgMap[category.categoryImg] ?? "assets/imgs/default.png";
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.0),
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    category["imagePath"]!,
-                    height: 40,
-                    width: 50,
-                    //fit: BoxFit.cover,
-                  ),
                 ),
-                Text(
-                  category["title"]!,
-                  style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: black,
-                  ),
-                )
-              ],
-            ),
-          );
-        }).toList(),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(imgPath, height: 40, width: 50),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      category.categoryName,
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
       ),
     );
   }

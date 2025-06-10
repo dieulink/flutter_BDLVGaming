@@ -21,14 +21,24 @@ class RegisterPage extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(30.0),
-            margin: EdgeInsets.only(top: 30),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context); //trở về page trước
+                    },
+                    child: Icon(
+                      Icons.navigate_before,
+                      color: mainColor,
+                      size: 30,
+                    ),
+                  ),
                   Container(
                     alignment: Alignment.center,
+                    //margin: EdgeInsets.only(top: 30),
                     child: Image.asset(
                       'assets/icons/logo.png',
                       width: 100,
@@ -86,12 +96,12 @@ class RegisterPage extends StatelessWidget {
                   //pass
                   FormLoginWidget(
                     controller: passwordRegisterController,
-                    text: 'Password',
+                    text: 'Mật khẩu',
                     textInputType: TextInputType.text,
                     obscure: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Vui lòng nhập password !';
+                        return 'Vui lòng nhập Mật khẩu !';
                       }
                       return null;
                     },
@@ -105,7 +115,7 @@ class RegisterPage extends StatelessWidget {
                     obscure: false,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Vui lòng nhập password !';
+                        return 'Vui lòng nhập Tên người dùng !';
                       }
                       return null;
                     },

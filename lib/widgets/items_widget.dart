@@ -17,47 +17,22 @@ class ItemsWidget extends StatelessWidget {
             },
             child: Container(
               padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: mainColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          "-50%",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      // Icon(
-                      //   Icons.favorite_border,
-                      //   color: Colors.red,
-                      // )
-                    ],
-                  ),
                   InkWell(
                     onTap: () {},
                     child: Container(
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(bottom: 10),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
                           "assets/imgs/banSung.jpg",
-                          height: 120,
-                          width: 150,
+                          height: 200,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -69,22 +44,22 @@ class ItemsWidget extends StatelessWidget {
                     child: Text(
                       "Tên gameee",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "description ở đâyyyyyyyyyyyyyyyy",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: const Color.fromARGB(255, 63, 63, 63),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: Text(
+                  //     "description ở đâyyyyyyyyyyyyyyyy",
+                  //     style: TextStyle(
+                  //       fontSize: 15,
+                  //       color: const Color.fromARGB(255, 63, 63, 63),
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Row(

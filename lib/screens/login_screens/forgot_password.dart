@@ -16,14 +16,24 @@ class ForgotPassword extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(30.0),
-            margin: EdgeInsets.only(top: 70),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context); //trở về page trước
+                    },
+                    child: Icon(
+                      Icons.navigate_before,
+                      color: mainColor,
+                      size: 30,
+                    ),
+                  ),
                   Container(
                     alignment: Alignment.center,
+                    margin: EdgeInsets.only(top: 70),
                     child: Image.asset(
                       'assets/icons/logo.png',
                       width: 100,
