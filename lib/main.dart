@@ -11,7 +11,8 @@ import 'package:app_ban_game/screens/main_screens/cart_page.dart';
 import 'package:app_ban_game/screens/main_screens/home.dart';
 import 'package:app_ban_game/screens/main_screens/item_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 

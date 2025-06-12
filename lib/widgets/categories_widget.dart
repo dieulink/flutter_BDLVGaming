@@ -1,3 +1,4 @@
+import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ban_game/models/category_model.dart';
 import 'package:app_ban_game/services/category_service.dart';
@@ -57,10 +58,11 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               String imgPath =
                   imgMap[category.categoryImg] ?? "assets/imgs/default.png";
               return Container(
-                margin: EdgeInsets.symmetric(horizontal: 8.0),
+                margin: EdgeInsets.symmetric(horizontal: 10.0),
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  //color: Colors.white,
+                  color: const Color.fromARGB(59, 0, 176, 215),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
