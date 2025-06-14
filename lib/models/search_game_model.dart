@@ -1,4 +1,4 @@
-class SearchGame {
+class SearchGameModel {
   final int id;
   final String name;
   final String? category;
@@ -8,7 +8,7 @@ class SearchGame {
   final String releaseDate;
   final List<String> images;
 
-  SearchGame({
+  SearchGameModel({
     required this.id,
     required this.name,
     this.category,
@@ -19,8 +19,8 @@ class SearchGame {
     required this.images,
   });
 
-  factory SearchGame.fromJson(List<dynamic> json) {
-    return SearchGame(
+  factory SearchGameModel.fromJson(List<dynamic> json) {
+    return SearchGameModel(
       id: json[0],
       name: json[1],
       category: json[2],

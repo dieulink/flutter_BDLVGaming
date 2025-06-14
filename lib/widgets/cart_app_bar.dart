@@ -10,15 +10,10 @@ class CartAppBar extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap:() {
+            onTap: () {
               Navigator.pop(context); //trở về page trước
             },
-            child: 
-            Icon(
-              Icons.navigate_before,
-              color: mainColor,
-              size: 30,
-            )            
+            child: Icon(Icons.navigate_before, color: mainColor, size: 30),
           ),
           Padding(
             padding: EdgeInsets.only(left: 20),
@@ -32,11 +27,7 @@ class CartAppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Icon(
-            Icons.more_vert,
-            color: mainColor,
-            size: 30,
-          )
+          Icon(Icons.more_vert, color: mainColor, size: 30),
         ],
       ),
     );

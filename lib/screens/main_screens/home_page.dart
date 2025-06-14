@@ -2,6 +2,7 @@ import 'package:app_ban_game/ui_values.dart';
 import 'package:app_ban_game/widgets/categories_widget.dart';
 import 'package:app_ban_game/widgets/home_app_bar.dart';
 import 'package:app_ban_game/widgets/items_widget.dart';
+import 'package:app_ban_game/widgets/search_game_bar.dart';
 import 'package:flutter/material.dart';
 
 // File: home_page.dart
@@ -21,42 +22,14 @@ class HomePage extends StatelessWidget {
             decoration: BoxDecoration(
               color: const Color.fromARGB(19, 0, 0, 0),
               // borderRadius: BorderRadius.only(
-              //   topLeft: Radius.circular(35),
+              //   topLeft: Radius.circular(35)
               //   topRight: Radius.circular(35)
               // )
             ),
             child: Column(
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  height: 45,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 5),
-                        height: 50,
-                        width: getSizeWidth(context) * 0.7,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Tìm kiếm ...",
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      Image.asset(
-                        'assets/icons/search.png',
-                        width: 20,
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                ),
+                SearchGameBar(),
+
                 SizedBox(height: getSizeHeight(context), child: ItemsWidget()),
               ],
             ),
