@@ -3,6 +3,7 @@ import 'package:app_ban_game/screens/login_screens/register_page.dart';
 import 'package:app_ban_game/screens/login_screens/reset_password.dart';
 import 'package:app_ban_game/screens/login_screens/success_page.dart';
 import 'package:app_ban_game/screens/main_screens/profile_page.dart';
+import 'package:app_ban_game/screens/main_screens/search_page.dart';
 import 'package:app_ban_game/screens/profile_screens/info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ class MainApp extends StatelessWidget {
         "infoPage": (context) => InfoPage(),
         "forgotPass": (context) => ForgotPassword(),
         "resetPass": (context) => ResetPassword(),
+        "searchPage": (context) => SearchPage(),
       },
     );
   }

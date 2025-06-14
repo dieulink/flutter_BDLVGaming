@@ -13,49 +13,32 @@ class ItemAppBar extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap:() {
-              Navigator.pop(context); 
+            onTap: () {
+              Navigator.pop(context);
             },
-            child: 
-            Icon(
-              Icons.navigate_before,
-              color: mainColor,
-              size: 30,
-            )            
+            child: Icon(Icons.navigate_before, color: mainColor, size: 30),
           ),
           Spacer(),
-           Icon(
-                Icons.favorite_border,
-                color: Colors.red,
-                ),
-            SizedBox(width: 30,),
-            badges.Badge(
+          SizedBox(width: 30),
+          badges.Badge(
             badgeContent: const Text(
               '3',
-              style: TextStyle(
-                color: Colors.white
-                ),
-              ),
-            badgeStyle: badges.BadgeStyle(
-              badgeColor: Colors.red,  
+              style: TextStyle(color: Colors.white),
             ),
+            badgeStyle: badges.BadgeStyle(badgeColor: Colors.red),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, "cartPage");
               },
-              child: 
+              child:
               // Image.asset(
               //   'assets/icons/cart.png',
               //   width: 30,
               //   height: 30,
               // )
-              Icon(
-                Icons.shopping_cart_outlined,
-                size: 30,
-                color: mainColor,
-              )
+              Icon(Icons.shopping_cart_outlined, size: 30, color: mainColor),
             ),
-          )
+          ),
         ],
       ),
     );

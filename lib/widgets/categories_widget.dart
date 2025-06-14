@@ -4,6 +4,15 @@ import 'package:app_ban_game/models/category_model.dart';
 import 'package:app_ban_game/services/category_service.dart';
 
 class CategoriesWidget extends StatefulWidget {
+  final int? selectedCategoryId;
+  final Function(int?)? onCategorySelected;
+
+  const CategoriesWidget({
+    super.key,
+    required this.selectedCategoryId,
+    this.onCategorySelected,
+  });
+
   @override
   State<CategoriesWidget> createState() => _CategoriesWidgetState();
 }
@@ -53,34 +62,69 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children:
-            categories.map((category) {
-              String imgPath =
-                  imgMap[category.categoryImg] ?? "assets/imgs/default.png";
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 10.0),
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        children: [
+          // Nút "Tất cả"
+          InkWell(
+            onTap: () {
+              widget.onCategorySelected?.call(null);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              decoration: BoxDecoration(
+                color: widget.selectedCategoryId == null ? mainColor : white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: const [
+                  Icon(Icons.list, color: Colors.black, size: 40),
+                  SizedBox(width: 5),
+                  Text("Tất cả", style: TextStyle(color: Colors.black)),
+                ],
+              ),
+            ),
+          ),
+
+          // Các thể loại khác
+          ...categories.map((category) {
+            bool isSelected = widget.selectedCategoryId == category.categoryId;
+
+            return InkWell(
+              onTap: () {
+                widget.onCategorySelected?.call(category.categoryId);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 10,
+                ),
                 decoration: BoxDecoration(
-                  //color: Colors.white,
-                  color: const Color.fromARGB(59, 0, 176, 215),
+                  color: isSelected ? mainColor : white,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(imgPath, height: 40, width: 50),
+                      child: Image.asset(
+                        imgMap[category.categoryImg] ??
+                            "assets/imgs/default.png",
+                        height: 40,
+                        width: 50,
+                      ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
                       category.categoryName,
-                      style: TextStyle(fontSize: 15, color: Colors.black),
+                      style: const TextStyle(fontSize: 15, color: Colors.black),
                     ),
                   ],
                 ),
-              );
-            }).toList(),
+              ),
+            );
+          }).toList(),
+        ],
       ),
     );
   }
