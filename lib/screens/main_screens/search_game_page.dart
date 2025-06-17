@@ -52,7 +52,7 @@ class _SearchGamePageState extends State<SearchGamePage> {
   }
 
   Future<GameDetail?> fetchGameDetail(int gameId) async {
-    final url = Uri.parse('http://192.168.5.136:8080/detail/game/$gameId');
+    final url = Uri.parse('http://192.168.110.57:8080/detail/game/$gameId');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

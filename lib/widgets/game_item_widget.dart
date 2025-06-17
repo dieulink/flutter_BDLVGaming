@@ -7,6 +7,7 @@ class GameItemWidget extends StatelessWidget {
   final String imageUrl;
   final String price;
   final VoidCallback onTap;
+  final VoidCallback? onAddToCart;
 
   const GameItemWidget({
     super.key,
@@ -14,6 +15,7 @@ class GameItemWidget extends StatelessWidget {
     required this.imageUrl,
     required this.price,
     required this.onTap,
+    this.onAddToCart,
   });
 
   @override
@@ -84,7 +86,10 @@ class GameItemWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Icon(Icons.shopping_cart_checkout, color: mainColor),
+                  GestureDetector(
+                    onTap: onAddToCart, // ✅ xử lý khi nhấn icon giỏ hàng
+                    child: Icon(Icons.shopping_cart_checkout, color: mainColor),
+                  ),
                 ],
               ),
             ),

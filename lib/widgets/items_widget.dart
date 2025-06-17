@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:app_ban_game/models/cart_item.dart';
 import 'package:app_ban_game/services/bestsale_service.dart';
+import 'package:app_ban_game/services/cart_service.dart';
 import 'package:app_ban_game/services/game_detail_service.dart';
 import 'package:app_ban_game/services/game_detail_service.dart'
     as GameDetailService;
@@ -10,6 +14,8 @@ import 'package:app_ban_game/services/category_item_service.dart';
 import 'package:app_ban_game/widgets/game_item_widget.dart';
 import 'package:app_ban_game/widgets/categories_widget.dart';
 import 'package:app_ban_game/ui_values.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ItemsWidget extends StatefulWidget {
   const ItemsWidget({super.key});
@@ -177,7 +183,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                               "t_screenshot_big",
                             )
                             : 'assets/imgs/default.jpg',
-                    price: '${game.price.toStringAsFixed(0)} vnđ',
+                    price:
+                        '${NumberFormat("#,###", "vi_VN").format(game.price)} vnđ',
                     onTap: () async {
                       final detail = await GameDetailService.fetchGameDetail(
                         game.id,
@@ -194,6 +201,37 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                             content: Text('Không thể tải chi tiết game'),
                           ),
                         );
+                      }
+                    },
+                    onAddToCart: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      final decoded = prefs.getString('decode_token');
+
+                      if (decoded != null) {
+                        final map = jsonDecode(decoded);
+                        final userId = map['userId'];
+                        final cartItem = CartItem(
+                          userId: userId,
+                          gameId: game.id,
+                        );
+
+                        final result = await CartService.addToCart(cartItem);
+
+                        if (result == -1) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Game đã có trong giỏ hàng'),
+                            ),
+                          );
+                        } else if (result != null) {
+                          Navigator.pushNamed(context, 'cartPage');
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Thêm vào giỏ hàng thất bại'),
+                            ),
+                          );
+                        }
                       }
                     },
                   );

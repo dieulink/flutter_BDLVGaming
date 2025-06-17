@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/review_model.dart';
 
 class ReviewService {
-  final String baseUrl = "http://192.168.5.136:8080";
+  final String baseUrl = "http://192.168.110.57:8080";
 
   Future<List<ReviewModel>> getReviews(int gameId, int page) async {
     final url = Uri.parse('$baseUrl/reviewList?gameId=$gameId&page=$page');

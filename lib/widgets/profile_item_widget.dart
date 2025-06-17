@@ -2,49 +2,47 @@ import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
 
 class ProfileItemWidget extends StatelessWidget {
-  const ProfileItemWidget({super.key, required this.icon, required this.text, required this.page});
   final IconData icon;
   final String text;
-  final String page;
+  final VoidCallback? onTap; // Cho phép xử lý hành động tuỳ ý khi nhấn
+
+  const ProfileItemWidget({
+    super.key,
+    required this.icon,
+    required this.text,
+    this.onTap,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60,
       decoration: BoxDecoration(
         color: const Color.fromARGB(52, 206, 206, 206),
-        borderRadius: BorderRadius.circular(6)
+        borderRadius: BorderRadius.circular(6),
       ),
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context,page);
-        },
+        onTap: onTap, // sử dụng callback
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Row(
             children: [
-              Icon(
-                icon,
-                size: 30,
-                color: mainColor,
-              ),
-              SizedBox(width: 20,),
+              Icon(icon, size: 30, color: mainColor),
+              const SizedBox(width: 20),
               Text(
                 text,
-                style: TextStyle(
-                  color: Colors.grey[800],
-                  fontSize: 15
-                ),
+                style: TextStyle(color: Colors.grey[800], fontSize: 15),
               ),
-              Spacer(),
+              const Spacer(),
               Icon(
                 Icons.navigate_next_sharp,
                 size: 30,
                 color: Colors.grey[800],
-              )
+              ),
             ],
           ),
         ),
-      ) 
-      );
+      ),
+    );
   }
 }

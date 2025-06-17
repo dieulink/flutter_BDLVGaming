@@ -1,3 +1,5 @@
+import 'package:app_ban_game/models/cart_response_dto.dart';
+
 class GameItem {
   final int id;
   final String name;

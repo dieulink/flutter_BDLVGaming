@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ResetPasswordService {
   static Future<bool> resetPasswordService(ResetPasswordRequest request) async {
-    final url = Uri.parse('http://192.168.5.136:8080/checkOTP_resetPassword');
+    final url = Uri.parse('http://192.168.110.57:8080/checkOTP_resetPassword');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode(request.toJson());
 

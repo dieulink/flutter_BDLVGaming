@@ -8,7 +8,7 @@ class CategoryItemService {
     required int categoryId,
   }) async {
     final uri = Uri.parse(
-      'http://192.168.5.136:8080/home/category?page=$page&categoryId=$categoryId',
+      'http://192.168.110.57:8080/home/category?page=$page&categoryId=$categoryId',
     );
 
     final response = await http.get(

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class CategoryService {
   static Future<List<CategoryModel>> fetchCategories() async {
-    final url = Uri.parse('http://192.168.5.136:8080/home/categories');
+    final url = Uri.parse('http://192.168.110.57:8080/home/categories');
     final response = await http.get(url);
 
     print('API body: ${response.body}');

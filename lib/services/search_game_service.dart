@@ -6,7 +6,7 @@ class SearchGameService {
   static Future<List<SearchGameModel>> fetchGames(String keyword) async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.5.136:8080/home/search?page=0&searchInput=$keyword',
+        'http://192.168.110.57:8080/home/search?page=0&searchInput=$keyword',
       ),
     );
 

@@ -37,6 +37,7 @@ flutter:
     - assets/icons/   
     - assets/imgs/     
     - assets/imgs/theloai/
+    - assets/imgs/default.jpg
   fonts:
     - family: Montserrat
       fonts:

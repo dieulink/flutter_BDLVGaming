@@ -4,6 +4,7 @@ import 'package:app_ban_game/screens/login_screens/reset_password.dart';
 import 'package:app_ban_game/screens/login_screens/success_page.dart';
 import 'package:app_ban_game/screens/main_screens/profile_page.dart';
 import 'package:app_ban_game/screens/main_screens/search_game_page.dart';
+import 'package:app_ban_game/screens/profile_screens/help_page.dart';
 import 'package:app_ban_game/screens/profile_screens/info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       routes: {
-        "/": (context) => Home(), //OnBoarding(),
+        "/": (context) => OnBoarding(),
         "cartPage": (context) => CartPage(),
         "itemPage": (context) => ItemPage(),
         "homePage": (context) => Home(),
@@ -35,6 +36,7 @@ class MainApp extends StatelessWidget {
         "infoPage": (context) => InfoPage(),
         "forgotPass": (context) => ForgotPassword(),
         "resetPass": (context) => ResetPassword(),
+        "helpPage": (context) => HelpPage(),
       },
     );
   }

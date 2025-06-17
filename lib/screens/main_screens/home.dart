@@ -1,5 +1,5 @@
 import 'package:app_ban_game/screens/main_screens/home_page.dart';
-import 'package:app_ban_game/screens/main_screens/likes_page.dart';
+import 'package:app_ban_game/screens/main_screens/list_order_page.dart';
 import 'package:app_ban_game/screens/main_screens/notifications_page.dart';
 import 'package:app_ban_game/screens/main_screens/profile_page.dart';
 import 'package:app_ban_game/ui_values.dart';
@@ -14,22 +14,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomePageState extends State<Home> {
-
   int selectedIndex = 0;
 
-    final List<Widget> pages = [
+  final List<Widget> pages = [
     HomePage(),
-    LikesPage(),
+    ListOrderPage(),
     NotificationsPage(),
     ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: pages,
-      ),
+      body: IndexedStack(index: selectedIndex, children: pages),
       bottomNavigationBar: Container(
         color: Colors.white,
         child: Padding(
@@ -41,10 +37,10 @@ class _HomePageState extends State<Home> {
             tabBackgroundColor: mainColor,
             padding: EdgeInsets.all(10),
             tabs: const [
-              GButton(icon: Icons.home, text: 'Home'),
-              GButton(icon: Icons.favorite_border, text: 'Likes'),
-              GButton(icon: Icons.notifications_outlined, text: 'Notices'),
-              GButton(icon: Icons.person_2_outlined, text: 'Profile'),
+              GButton(icon: Icons.home, text: 'Trang chủ'),
+              GButton(icon: Icons.list_rounded, text: 'Đã mua'),
+              GButton(icon: Icons.notifications_outlined, text: 'Thông báo'),
+              GButton(icon: Icons.person_2_outlined, text: 'Thông tin'),
             ],
             selectedIndex: selectedIndex,
             onTabChange: (index) {
@@ -57,4 +53,4 @@ class _HomePageState extends State<Home> {
       ),
     );
   }
-} 
+}
