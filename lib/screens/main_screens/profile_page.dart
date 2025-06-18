@@ -2,29 +2,33 @@ import 'package:app_ban_game/ui_values.dart';
 import 'package:app_ban_game/widgets/profile_item_widget.dart';
 import 'package:flutter/material.dart';
 
-// File: profile_page.dart
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 1,
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Thông tin',
+          style: TextStyle(
+            color: mainColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        iconTheme: const IconThemeData(color: mainColor),
+      ),
       body: Padding(
         padding: EdgeInsets.all(25),
         child: Column(
           children: [
-            SizedBox(height: 20),
-            Center(
-              child: Text(
-                "Profile",
-                style: TextStyle(
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold,
-                  color: mainColor,
-                ),
-              ),
-            ),
             SizedBox(height: 20),
             SizedBox(
               width: 115,
@@ -77,7 +81,6 @@ class ProfilePage extends StatelessWidget {
               icon: Icons.logout_outlined,
               text: "Đăng xuất",
               onTap: () {
-                // Xử lý đăng xuất
                 showDialog(
                   context: context,
                   builder:

@@ -1,5 +1,5 @@
 import 'package:app_ban_game/screens/main_screens/home_page.dart';
-import 'package:app_ban_game/screens/main_screens/list_order_page.dart';
+import 'package:app_ban_game/screens/main_screens/list_order_history_page.dart';
 import 'package:app_ban_game/screens/main_screens/notifications_page.dart';
 import 'package:app_ban_game/screens/main_screens/profile_page.dart';
 import 'package:app_ban_game/ui_values.dart';
@@ -18,7 +18,7 @@ class _HomePageState extends State<Home> {
 
   final List<Widget> pages = [
     HomePage(),
-    ListOrderPage(),
+    ListOrderHistoryPage(),
     NotificationsPage(),
     ProfilePage(),
   ];

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:app_ban_game/models/cart_response_dto.dart';
 
 class CartPageService {
-  static const String baseUrl = 'http://192.168.110.57:8080';
+  static const String baseUrl = 'http://192.168.5.136:8080';
 
   static Future<CartResponseDto> fetchCart(int userId) async {
     final url = Uri.parse('$baseUrl/listCart');

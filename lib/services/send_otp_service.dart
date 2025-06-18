@@ -7,7 +7,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 
 class SendOtpService {
   static Future<bool> sendOtpService(EmailRequest request) async {
-    final url = Uri.parse('http://192.168.110.57:8080/sendOTP');
+    final url = Uri.parse('http://192.168.5.136:8080/sendOTP');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode(request.toJson());
 

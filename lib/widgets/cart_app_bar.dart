@@ -1,7 +1,9 @@
 import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
 
-class CartAppBar extends StatelessWidget {
+class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CartAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +13,7 @@ class CartAppBar extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              Navigator.pop(context); //trở về page trước
+              Navigator.pop(context);
             },
             child: Icon(Icons.navigate_before, color: mainColor, size: 30),
           ),
@@ -32,4 +34,7 @@ class CartAppBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

@@ -1,12 +1,23 @@
-import 'package:app_ban_game/models/game_item.dart';
 import 'package:app_ban_game/ui_values.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:app_ban_game/models/cart_game_item.dart';
+import 'package:app_ban_game/models/cart_item.dart';
+import 'package:app_ban_game/services/delete_cart_service.dart';
+import 'package:intl/intl.dart';
 
 class CartItemWidget extends StatelessWidget {
-  final List<GameItem> gameList;
+  final List<CartGameItem> gameList;
+  final int userId;
+  final VoidCallback onRefresh;
+  final Function(double)? onTotalChanged;
 
-  const CartItemWidget({super.key, required this.gameList});
+  const CartItemWidget({
+    super.key,
+    required this.gameList,
+    required this.userId,
+    required this.onRefresh,
+    this.onTotalChanged,
+  });
 
   Widget buildImage(String? url) {
     if (url != null && url.startsWith("http")) {
@@ -34,8 +45,36 @@ class CartItemWidget extends StatelessWidget {
     }
   }
 
+  Future<void> _handleDelete(BuildContext context, int gameId) async {
+    final item = CartItem(userId: userId, gameId: gameId);
+    final result = await DeleteCartService.deleteCart(item);
+
+    if (result != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Đã xóa sản phẩm khỏi giỏ hàng')),
+      );
+      onRefresh(); // Gọi lại API để cập nhật UI
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Xóa thất bại!')));
+    }
+  }
+
+  void _notifyTotal() {
+    if (onTotalChanged != null) {
+      double total = 0;
+      for (var game in gameList) {
+        total += game.price;
+      }
+      onTotalChanged!(total);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _notifyTotal());
+
     return ListView.builder(
       itemCount: gameList.length,
       shrinkWrap: true,
@@ -45,105 +84,54 @@ class CartItemWidget extends StatelessWidget {
 
         return Container(
           height: 110,
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.white, // nền trắng
             borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: const Color.fromARGB(144, 0, 176, 215),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 5),
+            ],
           ),
           child: Row(
             children: [
-              Radio(
-                value: game.id,
-                groupValue: null,
-                onChanged: (_) {},
-                activeColor: mainColor,
-              ),
               Container(
-                margin: const EdgeInsets.only(right: 15),
+                margin: const EdgeInsets.all(20),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: buildImage(game.image),
+                  child: buildImage(game.gameImg),
                 ),
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        game.name,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        "${game.price.toStringAsFixed(0)} vnđ",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.delete_outline, color: Colors.red),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          child: const Icon(CupertinoIcons.minus, size: 15),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            game.sold.toString(),
-                            style: const TextStyle(fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          child: const Icon(CupertinoIcons.plus, size: 15),
-                        ),
-                      ],
+                    Text(
+                      game.gameName,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "${NumberFormat("#,###", "vi_VN").format(game.price)} vnđ",
+                      style: const TextStyle(color: Colors.black, fontSize: 14),
                     ),
                   ],
                 ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.delete_outline, color: Colors.red),
+                onPressed: () => _handleDelete(context, game.gameId),
               ),
             ],
           ),

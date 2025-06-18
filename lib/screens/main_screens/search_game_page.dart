@@ -52,7 +52,7 @@ class _SearchGamePageState extends State<SearchGamePage> {
   }
 
   Future<GameDetail?> fetchGameDetail(int gameId) async {
-    final url = Uri.parse('http://192.168.110.57:8080/detail/game/$gameId');
+    final url = Uri.parse('http://192.168.5.136:8080/detail/game/$gameId');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -118,15 +118,26 @@ class _SearchGamePageState extends State<SearchGamePage> {
                       itemCount: games.length,
                       itemBuilder: (context, index) {
                         final game = games[index];
-                        return Card(
-                          color: Colors.grey[100],
+                        return Container(
                           margin: const EdgeInsets.symmetric(
                             horizontal: 12,
                             vertical: 6,
                           ),
-                          shape: RoundedRectangleBorder(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: const Color.fromARGB(131, 0, 176, 215),
+                              width: 1.5,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                blurRadius: 5,
+                              ),
+                            ],
                           ),
+
                           child: ListTile(
                             onTap: () async {
                               final gameDetail = await fetchGameDetail(game.id);

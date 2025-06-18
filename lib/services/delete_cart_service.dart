@@ -2,26 +2,25 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:app_ban_game/models/cart_item.dart';
 
-class CartService {
+class DeleteCartService {
   static const String _baseUrl = 'http://192.168.5.136:8080';
 
-  static Future<int?> addToCart(CartItem item) async {
-    final url = Uri.parse('$_baseUrl/addCart');
+  static Future<int?> deleteCart(CartItem item) async {
+    final url = Uri.parse('$_baseUrl/deleteCart');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode(item.toJson());
-    print(body);
+
     try {
       final response = await http.post(url, headers: headers, body: body);
-      print('Response body: ${response.body}');
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else if (response.statusCode == 409) {
-        return -1; //game đã thêm vào giỏ rồi
+        final result = jsonDecode(response.body);
+        return result is int ? result : null;
       } else {
+        print('Lỗi server: ${response.statusCode}');
         return null;
       }
     } catch (e) {
-      print('Lỗi khi thêm vào giỏ hàng: $e');
+      print('Lỗi khi xóa giỏ hàng: $e');
       return null;
     }
   }

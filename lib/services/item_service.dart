@@ -7,7 +7,7 @@ class ItemService {
     required int page,
     required int categoryId,
   }) async {
-    final uri = Uri.parse('http://192.168.110.57:8080/home/gameList/$page');
+    final uri = Uri.parse('http://192.168.5.136:8080/home/gameList/$page');
     final response = await http.get(
       uri,
       headers: {'Content-Type': 'application/json'},

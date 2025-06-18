@@ -5,7 +5,7 @@ import 'package:app_ban_game/models/game_item.dart';
 class BestSaleService {
   static Future<List<GameItem>> fetchBestSellingGames(int page) async {
     final uri = Uri.parse(
-      'http://192.168.110.57:8080/home/gameListBestSale/$page',
+      'http://192.168.5.136:8080/home/gameListBestSale/$page',
     );
     final response = await http.get(uri);
 

@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:app_ban_game/models/cart_item.dart';
 import 'package:app_ban_game/models/game_detail.dart';
 import 'package:app_ban_game/models/review_model.dart';
+import 'package:app_ban_game/services/cart_service.dart';
 import 'package:app_ban_game/services/review_service.dart';
 import 'package:app_ban_game/ui_values.dart';
 import 'package:app_ban_game/widgets/item_app_bar.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ItemPage extends StatefulWidget {
   const ItemPage({super.key});
@@ -199,8 +202,43 @@ class _ItemPageState extends State<ItemPage> {
                     onTap:
                         game.availableAccount == 0
                             ? null
-                            : () {
-                              // logic thêm vào giỏ
+                            : () async {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+                              final decoded = prefs.getString('decode_token');
+
+                              if (decoded != null) {
+                                final map = jsonDecode(decoded);
+                                final userId = map['userId'];
+                                final cartItem = CartItem(
+                                  userId: userId,
+                                  gameId: game.id,
+                                );
+
+                                final result = await CartService.addToCart(
+                                  cartItem,
+                                );
+
+                                if (result == -1) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Game đã có trong giỏ hàng',
+                                      ),
+                                    ),
+                                  );
+                                } else if (result != null) {
+                                  Navigator.pushNamed(context, 'cartPage');
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Thêm vào giỏ hàng thất bại',
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }
                             },
                     child: Container(
                       margin: const EdgeInsets.only(

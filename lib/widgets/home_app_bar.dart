@@ -2,7 +2,6 @@ import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 
-
 class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -11,11 +10,7 @@ class HomeAppBar extends StatelessWidget {
       padding: EdgeInsets.all(15),
       child: Row(
         children: [
-          Image.asset(
-            'assets/icons/logo.png',
-            width: 50,
-            height: 50,
-          ),
+          Image.asset('assets/icons/logo.png', width: 50, height: 50),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
@@ -23,38 +18,30 @@ class HomeAppBar extends StatelessWidget {
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
-                color: mainColor,            ),
+                color: mainColor,
+              ),
             ),
           ),
           Spacer(),
           badges.Badge(
             badgeContent: const Text(
-              '3',
-              style: TextStyle(
-                color: Colors.white
-                ),
-              ),
-            badgeStyle: badges.BadgeStyle(
-              badgeColor: Colors.red,  
+              ' ',
+              style: TextStyle(color: Colors.white),
             ),
+            badgeStyle: badges.BadgeStyle(badgeColor: Colors.red),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, "cartPage");
               },
-              child: 
+              child:
               // Image.asset(
               //   'assets/icons/cart.png',
               //   width: 30,
               //   height: 30,
               // )
-              Icon(
-                Icons.shopping_cart_outlined,
-                size: 30,
-                color: mainColor,
-              )
+              Icon(Icons.shopping_cart_outlined, size: 30, color: mainColor),
             ),
-          )
-
+          ),
         ],
       ),
     );

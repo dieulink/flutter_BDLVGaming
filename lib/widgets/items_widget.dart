@@ -203,37 +203,6 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         );
                       }
                     },
-                    onAddToCart: () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      final decoded = prefs.getString('decode_token');
-
-                      if (decoded != null) {
-                        final map = jsonDecode(decoded);
-                        final userId = map['userId'];
-                        final cartItem = CartItem(
-                          userId: userId,
-                          gameId: game.id,
-                        );
-
-                        final result = await CartService.addToCart(cartItem);
-
-                        if (result == -1) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Game đã có trong giỏ hàng'),
-                            ),
-                          );
-                        } else if (result != null) {
-                          Navigator.pushNamed(context, 'cartPage');
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Thêm vào giỏ hàng thất bại'),
-                            ),
-                          );
-                        }
-                      }
-                    },
                   );
                 },
               ),
