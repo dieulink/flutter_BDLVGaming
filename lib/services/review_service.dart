@@ -8,7 +8,7 @@ class ReviewService {
   Future<List<ReviewModel>> getReviews(int gameId, int page) async {
     final url = Uri.parse('$baseUrl/reviewList?gameId=$gameId&page=$page');
     final response = await http.get(url);
-    print(response);
+    //print(response);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final List reviews = data['reviewList'];

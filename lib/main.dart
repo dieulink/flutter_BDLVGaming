@@ -2,6 +2,7 @@ import 'package:app_ban_game/screens/login_screens/forgot_password.dart';
 import 'package:app_ban_game/screens/login_screens/register_page.dart';
 import 'package:app_ban_game/screens/login_screens/reset_password.dart';
 import 'package:app_ban_game/screens/login_screens/success_page.dart';
+import 'package:app_ban_game/screens/main_screens/list_order_history_page.dart';
 import 'package:app_ban_game/screens/main_screens/profile_page.dart';
 import 'package:app_ban_game/screens/main_screens/search_game_page.dart';
 import 'package:app_ban_game/screens/profile_screens/help_page.dart';
@@ -37,6 +38,7 @@ class MainApp extends StatelessWidget {
         "forgotPass": (context) => ForgotPassword(),
         "resetPass": (context) => ResetPassword(),
         "helpPage": (context) => HelpPage(),
+        "listOrderPage": (context) => ListOrderHistoryPage(),
       },
     );
   }

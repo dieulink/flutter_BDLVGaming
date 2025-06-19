@@ -87,7 +87,7 @@ class CartItemWidget extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           padding: const EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
-            color: Colors.white, // nền trắng
+            color: const Color.fromARGB(255, 226, 226, 226), // nền trắng
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: const Color.fromARGB(144, 0, 176, 215),

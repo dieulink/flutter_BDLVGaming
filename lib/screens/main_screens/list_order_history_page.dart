@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:app_ban_game/models/add_review_request.dart';
+import 'package:app_ban_game/services/add_review_service.dart';
+import 'package:app_ban_game/services/review_service.dart';
 import 'package:app_ban_game/ui_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -200,7 +203,7 @@ class _ListOrderHistoryPageState extends State<ListOrderHistoryPage> {
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: mainColor,
                                       ),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         final comment = commentController.text;
                                         if (rating == 0 || comment.isEmpty) {
                                           ScaffoldMessenger.of(
@@ -215,20 +218,75 @@ class _ListOrderHistoryPageState extends State<ListOrderHistoryPage> {
                                           return;
                                         }
 
-                                        ////
-                                        ScaffoldMessenger.of(
-                                          context,
-                                        ).showSnackBar(
-                                          const SnackBar(
-                                            content: Text('Đã gửi đánh giá'),
-                                          ),
+                                        final prefs =
+                                            await SharedPreferences.getInstance();
+                                        final decodeJson = prefs.getString(
+                                          'decode_token',
+                                        );
+                                        final userId =
+                                            decodeJson != null
+                                                ? jsonDecode(
+                                                  decodeJson,
+                                                )['userId']
+                                                : null;
+
+                                        if (userId == null) {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Không xác định được người dùng',
+                                              ),
+                                            ),
+                                          );
+                                          return;
+                                        }
+                                        print(
+                                          'gameId: ${acc.gameId} (${acc.gamename})',
                                         );
 
-                                        setState(() {
-                                          rating = 0;
-                                          commentController.clear();
-                                        });
+                                        final review = AddReviewRequest(
+                                          comment: comment,
+                                          score: rating.round(),
+                                          gameId: acc.gameId,
+                                          userId: userId,
+                                        );
+
+                                        final success =
+                                            await AddReviewService.addReview(
+                                              review,
+                                            );
+
+                                        if (!mounted) return;
+
+                                        if (success) {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Đã gửi đánh giá thành công',
+                                              ),
+                                            ),
+                                          );
+                                          setState(() {
+                                            rating = 0;
+                                            commentController.clear();
+                                          });
+                                        } else {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Gửi đánh giá thất bại',
+                                              ),
+                                            ),
+                                          );
+                                        }
                                       },
+
                                       child: const Text(
                                         'Gửi',
                                         style: TextStyle(color: white),

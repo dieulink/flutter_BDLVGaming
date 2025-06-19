@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
             //height: getSizeHeight(context)*0.8,
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(19, 0, 0, 0),
+              color: const Color.fromARGB(54, 0, 0, 0),
               // borderRadius: BorderRadius.only(
               //   topLeft: Radius.circular(35),hhh
               //   topRight: Radius.circular(35)

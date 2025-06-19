@@ -3,6 +3,7 @@ import 'package:app_ban_game/models/cart_item.dart';
 import 'package:app_ban_game/models/game_detail.dart';
 import 'package:app_ban_game/models/review_model.dart';
 import 'package:app_ban_game/services/cart_service.dart';
+import 'package:app_ban_game/services/game_detail_service.dart';
 import 'package:app_ban_game/services/review_service.dart';
 import 'package:app_ban_game/ui_values.dart';
 import 'package:app_ban_game/widgets/item_app_bar.dart';
@@ -24,13 +25,15 @@ class _ItemPageState extends State<ItemPage> {
   late GameDetail game;
   late String currentImage;
   List<ReviewModel> reviewList = [];
+  List<GameDetail> recommendedGames = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     game = ModalRoute.of(context)!.settings.arguments as GameDetail;
     currentImage = game.imageUrls.isNotEmpty ? game.imageUrls.first : '';
-    fetchReviews(); // Gọi API khi mở trang
+    fetchReviews();
+    fetchRecommendations();
   }
 
   Future<void> fetchReviews() async {
@@ -41,6 +44,39 @@ class _ItemPageState extends State<ItemPage> {
       });
     } catch (e) {
       print('Error fetching reviews: $e');
+    }
+  }
+
+  Future<void> fetchRecommendations() async {
+    try {
+      final encodedName = Uri.encodeComponent(game.name);
+      final url = Uri.parse(
+        'http://192.168.5.136:5000/recommend?gameName=$encodedName&gameId=${game.id}',
+      );
+
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> ids = decoded['game_id'];
+
+        print('>>> Recommendation game IDs: $ids');
+
+        recommendedGames.clear();
+
+        for (var id in ids) {
+          final gameDetail = await fetchGameDetail(id);
+          if (gameDetail != null) {
+            recommendedGames.add(gameDetail);
+          }
+        }
+
+        setState(() {}); // Cập nhật UI sau khi fetch xong
+      } else {
+        print('Failed to load recommendations: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching recommendations: $e');
     }
   }
 
@@ -189,11 +225,104 @@ class _ItemPageState extends State<ItemPage> {
                       ],
                     ),
                     RatingItem(reviews: reviewList),
+                    if (recommendedGames.isNotEmpty)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+                          const Text(
+                            'Gợi ý cho bạn',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: mainColor,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            height: 150,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: recommendedGames.length,
+                              itemBuilder: (context, index) {
+                                final recGame = recommendedGames[index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      'itemPage',
+                                      arguments: recGame,
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 120,
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          blurRadius: 4,
+                                          offset: const Offset(2, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              const BorderRadius.vertical(
+                                                top: Radius.circular(10),
+                                              ),
+                                          child: Image.network(
+                                            recGame.imageUrls.isNotEmpty
+                                                ? recGame.imageUrls.first
+                                                    .replaceFirst(
+                                                      "t_thumb",
+                                                      "t_cover_big",
+                                                    )
+                                                : '',
+                                            height: 90,
+                                            width: 120,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                                      'assets/imgs/default.jpg',
+                                                      height: 90,
+                                                      width: 120,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Text(
+                                            recGame.name,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),
             ),
-            // Nút mua hàng giữ nguyên
             Row(
               children: [
                 const Spacer(),
